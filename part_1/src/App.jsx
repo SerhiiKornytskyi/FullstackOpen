@@ -22,7 +22,6 @@ const App = () => {
   }); 
 
   return (
-    // Unicafe solution:
     <>
       <div>
         <Unicafe clicks={clicks} setClicks={setClicks} />
