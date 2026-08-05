@@ -48,34 +48,38 @@ const Unicafe = ({ clicks, setClicks }) => {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Unicafe</th>
-        </tr>
-      </thead>
-      <tbody>
-         <tr>
-          <td>
-            <h2>
-              Give feedback
-            </h2>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <Button text={labels.good} onClick={handleGoodClick} />
-            <Button text={labels.neutral} onClick={handleNeutralClick} />
-            <Button text={labels.bad} onClick={handleBadClick} />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <Statistics clicks={clicks} labels={labels} getAverage={getAverage} getPositive={getPositive} />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <section  className="unicafe">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <h2>Unicafe</h2>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <h3>
+                Give feedback
+              </h3>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Button text={labels.good} onClick={handleGoodClick} />
+              <Button text={labels.neutral} onClick={handleNeutralClick} />
+              <Button text={labels.bad} onClick={handleBadClick} />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Statistics clicks={clicks} labels={labels} getAverage={getAverage} getPositive={getPositive} />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   )
 }
 
