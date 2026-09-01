@@ -1,14 +1,23 @@
 import { useState, useEffect } from 'react';
 import countriesService from './services/countriesService';
+import weatherService from './services/weatherService';
 import ShortCountryInfo from './components/ShortCountryInfo';
 import FullCountryInfo from './components/FullCountryInfo';
 
 const App = () => {
   const [filterValue, setFilterValue] = useState('');
   const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   const SHOW_RESULTS_TRASHOLD = 10;
   const MULTIPLE_RESULTS_TRASHOLD = 1;
+
+  const normalizedFilter = filterValue.trim().toLowerCase();
+  const filteredCountries = normalizedFilter
+    ? countries.filter((country) =>
+        country?.name?.common?.toLowerCase().includes(normalizedFilter)
+      )
+    : countries;
 
   useEffect(() => {
     let isMounted = true;
@@ -28,12 +37,11 @@ const App = () => {
     };
   }, []);
 
-  const normalizedFilter = filterValue.trim().toLowerCase();
-  const filteredCountries = normalizedFilter
-    ? countries.filter((country) =>
-        country?.name?.common?.toLowerCase().includes(normalizedFilter)
-      )
-    : countries;
+  useEffect(() => {
+    filteredCountries && filteredCountries.length === 1 && setSelectedCountry(filteredCountries[0]);
+  }, [filteredCountries]);
+
+  
 
   return (
     <div className="country-app">
@@ -79,10 +87,15 @@ const App = () => {
         <ul className="country-list">
           {
             filteredCountries.map(
-              (country) => filteredCountries.length > MULTIPLE_RESULTS_TRASHOLD ?
-                <ShortCountryInfo key={country.name.official} country={country} /> : 
-                <FullCountryInfo key={country.name.official} country={country} />
+              (country) => filteredCountries.length > MULTIPLE_RESULTS_TRASHOLD &&
+                <ShortCountryInfo key={country.name.official} country={country} onSelect={() => setSelectedCountry(country)} /> 
               )
+          }
+
+          {
+            selectedCountry && (
+              <FullCountryInfo key={selectedCountry.name.official} country={selectedCountry} />
+            )
           }
         </ul>
       )}

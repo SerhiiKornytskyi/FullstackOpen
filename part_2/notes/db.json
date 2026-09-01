@@ -1,0 +1,20 @@
+{
+  "notes": [
+    {
+      "id": "1",
+      "content": "HTML is easy",
+      "important": false
+    },
+    {
+      "content": "asdasd",
+      "important": true,
+      "id": "FNqO_UWLdsE"
+    },
+    {
+      "content": "asdasd",
+      "important": true,
+      "id": "5PmP1BShcLw"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

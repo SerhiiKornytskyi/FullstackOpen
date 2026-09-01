@@ -1,5 +1,20 @@
+import {useEffect, useState} from 'react';
+import weatherService from '../services/weatherService';
+import Weather from './Weather';
+
 const FullCountryInfo = ({ country }) => {
-  const capital = country.capital?.[0] ?? 'No capital listed';
+const capital = country.capital?.[0] ?? 'No capital listed';
+
+const [weather, setWeather] = useState(null);
+
+useEffect(() => {
+  async function fetchWeather() {
+    const weatherData = await weatherService(capital);
+    setWeather(weatherData);
+  };
+
+  fetchWeather();
+}, []);
 
   return (
     <li className="country-item">
@@ -24,6 +39,16 @@ const FullCountryInfo = ({ country }) => {
             </div>
           )
         }
+        {weather ? (
+          <Weather
+            capitalName={capital}
+            temperature={weather.main?.temp}
+            wind={weather.wind?.speed}
+            icon={weather.weather?.[0]?.icon}
+          />
+        ) : (
+          <p>Weather data not available</p>
+        )}
       </div>
     </li>
   );
