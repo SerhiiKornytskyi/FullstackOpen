@@ -1,6 +1,7 @@
-const morgan = require('morgan')
-const express = require('express')
-const app = express()
+const morgan = require('morgan');
+const express = require('express');
+const app = express();
+
 
 // own middleware function to log request details
 
@@ -18,7 +19,6 @@ const requestLogger = (request, response, next) => {
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
-
 
 app.use(express.json()); // Middleware to parse JSON bodies input
 app.use(requestLogger); // Middleware to log request details
