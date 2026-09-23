@@ -1,4 +1,3 @@
-const http = require('http')
 const cors = require('cors');
 
 const express = require('express')
@@ -6,6 +5,13 @@ const app = express()
 
 app.use(cors());
 app.use(express.json()); // Middleware to parse JSON bodies input
+
+// Now HTTP GET requests to the address www.serversaddress.com/index.html or 
+// www.serversaddress.com will show the React frontend. 
+// GET requests to the address www.serversaddress.com/api/notes 
+// will be handled by the backend code:
+app.use(express.static('dist'));
+
 
 let notes = [
   {
