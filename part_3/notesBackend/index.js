@@ -1,8 +1,10 @@
 const http = require('http')
+const cors = require('cors');
 
 const express = require('express')
 const app = express()
 
+app.use(cors());
 app.use(express.json()); // Middleware to parse JSON bodies input
 
 let notes = [
@@ -77,6 +79,7 @@ app.delete('/api/notes/:id', (request, response) => {
   response.status(204).end()
 })
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001; //Now we are using the port defined in the environment variable PORT or port 3001
+
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
