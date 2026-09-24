@@ -20,6 +20,7 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
+app.use(express.static('dist'));
 app.use(express.json()); // Middleware to parse JSON bodies input
 app.use(requestLogger); // Middleware to log request details
 app.use(morgan(function (tokens, req, res) {
